@@ -7,6 +7,7 @@ using Ticket_Booking_system_Backend_EAD.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// I have just add a comment to trying git commit
 
 builder.Services.Configure<TicketBookingSystemStoreDatabaseSetting>(builder.Configuration.GetSection(nameof(TicketBookingSystemStoreDatabaseSetting)));
 
