@@ -18,6 +18,16 @@ builder.Services.AddScoped<ItrainServices, TrainServices>();
 
 builder.Services.AddScoped<IUserServices, UserServices>();
 
+//code to allow CRUD operations from frontend
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost3000", builder =>
+    {
+        builder.WithOrigins("http://localhost:3000")
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -37,7 +47,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseCors("AllowLocalhost3000");
 app.MapControllers();
 
 app.Run();
