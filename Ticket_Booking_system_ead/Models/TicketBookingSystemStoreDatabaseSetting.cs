@@ -3,6 +3,7 @@
     public class TicketBookingSystemStoreDatabaseSetting : ITicketBookingSystemStoreDatabaseSetting
     {
         public String TrainCollectionName { get; set; } = String.Empty;
+        public String ReservationCollectionName { get; set; } = String.Empty;
         public String UserCollectionName { get; set; } = String.Empty;
         public String ConnectionString { get; set; } = String.Empty;
         public String DatabaseName { get; set; } = String.Empty;

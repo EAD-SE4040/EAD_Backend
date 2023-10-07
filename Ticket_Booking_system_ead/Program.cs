@@ -18,14 +18,17 @@ builder.Services.AddScoped<ItrainServices, TrainServices>();
 
 builder.Services.AddScoped<IUserServices, UserServices>();
 
+builder.Services.AddScoped<IReservationService, ReservationService>();
+
 //code to allow CRUD operations from frontend
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost3000", builder =>
     {
-        builder.WithOrigins("http://localhost:3000")
-               .AllowAnyHeader()
-               .AllowAnyMethod();
+        builder
+            .AllowAnyOrigin() // Allow requests from any origin
+            .AllowAnyHeader()
+            .AllowAnyMethod();
     });
 });
 builder.Services.AddControllers();

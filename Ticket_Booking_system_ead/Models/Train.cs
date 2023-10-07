@@ -9,10 +9,18 @@ namespace Ticket_Booking_system_Backend_EAD.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public String Id { get; set; } = String .Empty;
-        [BsonElement("name")]
-        public String Name { get; set; } = String.Empty;
-        [BsonElement("description")]
-        public String Description { get; set; } = String.Empty;
+
+        [BsonElement("trainNname")]
+        public String TrainNname { get; set; } = String.Empty;
+
+        [BsonElement("schedule")]
+        public String Schedule { get; set; } = String.Empty;
+
+        [BsonElement("from")]
+        public String From { get; set; } = String.Empty;
+
+        [BsonElement("to")]
+        public String To { get; set; } = String.Empty;
 
         //[BsonElement("seats_count")]
         //public int seats_count { get; set; } 
@@ -29,7 +37,7 @@ namespace Ticket_Booking_system_Backend_EAD.Models
         //[BsonElement("time ")]
         //public TimeOnly time { get; set; } 
 
-    
+
 
 
 

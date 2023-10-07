@@ -3,6 +3,7 @@
     public interface ITicketBookingSystemStoreDatabaseSetting
     {
         String TrainCollectionName { get; set; }
+        String ReservationCollectionName { get; set; }
         String UserCollectionName { get; set; }
         String ConnectionString { get; set; }
         String DatabaseName { get; set; }

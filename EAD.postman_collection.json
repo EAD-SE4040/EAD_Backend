@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "ad7a1f20-fdfc-4cca-a311-85916b15fcff",
+		"name": "EAD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28975889"
+	},
+	"item": [
+		{
+			"name": "train POST/GET",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"trainNname\": \"Express\",\r\n        \"schedule\": \"10.pm\",\r\n        \"from\": \"colombo\",\r\n        \"to\":\"jaffna\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7064/api/trains"
+			},
+			"response": []
+		},
+		{
+			"name": "train PUT/DELETE",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"id\":\"65217642270a7b0d7c108693\",\r\n        \"trainNname\": \"Express Train\",\r\n        \"schedule\": \"10.pm\",\r\n        \"from\": \"colombo\",\r\n        \"to\":\"jaffna\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7064/api/trains/65217642270a7b0d7c108693"
+			},
+			"response": []
+		},
+		{
+			"name": "reservation GET/POST",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "user GET/POST",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"password\": \"ytdytdytdtd\",\r\n        \"email\": \"an@gmail.com\",\r\n        \"nic\": \"886757565566v\",\r\n        \"phone\": \"07856565655\",\r\n        \"userType\": \"Admin\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7064/api/user"
+			},
+			"response": []
+		},
+		{
+			"name": "user PUT/DELETE",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"id\": \"652192d9cb3220501f934583\",\r\n        \"password\": \"check\",\r\n        \"email\": \"an@gmail.com\",\r\n        \"nic\": \"886757565566v\",\r\n        \"phone\": \"07856565655\",\r\n        \"userType\": \"Admin\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7064/api/user/652192d9cb3220501f934583"
+			},
+			"response": []
+		},
+		{
+			"name": "reservation PUT/DELETE",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"id\": \"65218bc0ce187f8369ce9c49\",\r\n        \"userID\": \"657483535837567474\",\r\n        \"trainID\": \"93658475937545698464\",\r\n        \"reservationDate\": \"23/11/2023\",\r\n        \"status\": \"Active\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7064/api/reservation/65218bc0ce187f8369ce9c49"
+			},
+			"response": []
+		}
+	]
+}
