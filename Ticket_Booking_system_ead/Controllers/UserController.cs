@@ -1,45 +1,4 @@
-﻿//using Microsoft.AspNetCore.Mvc;
-//using Ticket_Booking_system_Backend_EAD.Models;
-//using Ticket_Booking_system_Backend_EAD.Services;
-
-
-
-//namespace Ticket_Booking_system_Backend_EAD.Controllers
-//{
-//    [Route("api/user")]
-//    [ApiController]
-//    public class UserController : ControllerBase
-//    {
-//        private readonly IUserServices userServices;
-//        public UserController(IUserServices userServices)
-//        {
-//            this.userServices = userServices;
-//        }
-//        // GET: api/<UserController>
-//        [HttpGet]
-//        public ActionResult<User> Post([FromBody] User user)
-//        {
-//            userServices.CreateUser(user);
-//            return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
-//        }
-
-//        public ActionResult<User> Get(String id)
-//        {
-//            var user = userServices.GetUser(id);
-
-//            if (user == null)
-//            {
-//                return NotFound($"Students with Id = {id} not found ");
-
-//            }
-//            return user;
-//        }
-
-//    }
-//}
-
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Ticket_Booking_system_Backend_EAD.Models;
 using Ticket_Booking_system_Backend_EAD.Services;
 using System;
@@ -57,26 +16,66 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             _userServices = userServices;
         }
 
-        // POST: api/user
-        [HttpPost]
-        public IActionResult CreateUser([FromBody] User user)
+        // GET: api/users
+        [HttpGet]
+        public ActionResult<List<User>> Get()
         {
-            _userServices.CreateUser(user);
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+            var users = _userServices.GetUsers();
+            return Ok(users);
         }
 
-        // GET: api/user/{id}
+        // GET api/users/5
         [HttpGet("{id}")]
-        public IActionResult GetUser(string id)
+        public ActionResult<User> Get(string id)
         {
-            var user = _userServices.GetUser(id);
+            var User = _userServices.GetUser(id);
 
-            if (user == null)
+            if (User == null)
             {
                 return NotFound($"User with Id = {id} not found");
             }
 
-            return Ok(user);
+            return Ok(User);
+        }
+
+        // POST api/users
+        [HttpPost]
+        public ActionResult<User> Post([FromBody] User User)
+        {
+            _userServices.CreateUser(User);
+            return CreatedAtAction(nameof(Get), new { id = User.Id }, User);
+        }
+
+        // PUT api/users/5
+        [HttpPut("{id}")]
+        public ActionResult Put(string id, [FromBody] User updatedUser)
+        {
+            var existingUser = _userServices.GetUser(id);
+
+            if (existingUser == null)
+            {
+                return NotFound($"User with ID = {id} not found");
+            }
+
+            _userServices.UpdateUser(id, updatedUser);
+
+            return NoContent();
+        }
+
+        // DELETE api/users/5
+        [HttpDelete("{id}")]
+        public ActionResult Delete(string id)
+        {
+            var User = _userServices.GetUser(id);
+
+            if (User == null)
+            {
+                return NotFound($"User with ID = {id} not found");
+            }
+
+            _userServices.DeleteUser(id);
+
+            return NoContent();
         }
     }
 }

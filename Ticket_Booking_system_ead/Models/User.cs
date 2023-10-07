@@ -8,9 +8,22 @@ namespace Ticket_Booking_system_Backend_EAD.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public String Id { get; set; } = String.Empty;
-        [BsonElement("email")]
-        public String email { get; set; } = String.Empty;
+
         [BsonElement("password")]
-        public String password { get; set; } = String.Empty;
+        public String Password { get; set; } = String.Empty;
+
+        [BsonElement("email")]
+        public String Email { get; set; } = String.Empty;
+
+        [BsonElement("nic")]
+        public String Nic { get; set; } = String.Empty;
+
+        [BsonElement("phone")]
+        public String Phone { get; set; } = String.Empty;
+
+        [BsonElement("userType")]
+        public String UserType { get; set; } = String.Empty;
+
+
     }
 }
