@@ -28,22 +28,22 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
         [HttpGet("{id}")]
         public ActionResult<User> Get(string id)
         {
-            var User = _userServices.GetUser(id);
+            var user = _userServices.GetUser(id);
 
-            if (User == null)
+            if (user == null)
             {
                 return NotFound($"User with Id = {id} not found");
             }
 
-            return Ok(User);
+            return Ok(user);
         }
 
         // POST api/users
         [HttpPost]
-        public ActionResult<User> Post([FromBody] User User)
+        public ActionResult<User> Post([FromBody] User user)
         {
-            _userServices.CreateUser(User);
-            return CreatedAtAction(nameof(Get), new { id = User.Id }, User);
+            _userServices.CreateUser(user);
+            return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
         }
 
         // PUT api/users/5
@@ -66,9 +66,9 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(string id)
         {
-            var User = _userServices.GetUser(id);
+            var user = _userServices.GetUser(id);
 
-            if (User == null)
+            if (user == null)
             {
                 return NotFound($"User with ID = {id} not found");
             }
@@ -77,6 +77,34 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
 
             return NoContent();
         }
+
+        // POST api/user/login
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] User userLogin)
+        {
+            // Authenticate the user based on the provided username and password.
+            var authenticatedUser = _userServices.Authenticate(userLogin.Email, userLogin.Password);
+
+            if (authenticatedUser == null)
+            {
+                // Return a 401 Unauthorized if authentication fails.
+                return Unauthorized("Invalid email or password.");
+            }
+           
+
+            var response = new
+            {
+                User = new
+                {
+                    authenticatedUser.Id,
+                    authenticatedUser.Email,
+                    authenticatedUser.UserType,
+                    authenticatedUser.IsActive
+                },
+                Message = "Login successful" // Include a success message
+            };
+
+            return Ok(response);
+        }
     }
 }
-
