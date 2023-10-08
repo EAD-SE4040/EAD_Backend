@@ -44,5 +44,12 @@ namespace Ticket_Booking_system_Backend_EAD.Services
             updatedUser.Id = id;
             _user.ReplaceOne(user => user.Id == id, updatedUser);
         }
+
+        public User Authenticate(string username, string password)
+        {
+            var user = _user.Find(u => u.Email == username && u.Password == password).FirstOrDefault();
+
+            return user;
+        }
     }
 }

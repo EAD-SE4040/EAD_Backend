@@ -13,5 +13,7 @@ namespace Ticket_Booking_system_Backend_EAD.Services
         void UpdateUser(String id, User user);
 
         void DeleteUser(String id);
+
+        User Authenticate(string username, string password);
     }
 }
