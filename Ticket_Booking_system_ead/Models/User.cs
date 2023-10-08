@@ -24,9 +24,8 @@ namespace Ticket_Booking_system_Backend_EAD.Models
         [BsonElement("userType")]
         public String UserType { get; set; } = String.Empty;
 
-        [BsonElement("status")]
-        public bool Status { get; set; }
-
+        [BsonElement("isActive")]
+        public bool IsActive { get; set; }
 
     }
 }
