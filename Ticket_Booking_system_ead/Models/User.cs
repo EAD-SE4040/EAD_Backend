@@ -16,7 +16,7 @@ namespace Ticket_Booking_system_Backend_EAD.Models
         public String Email { get; set; } = String.Empty;
 
         [BsonElement("nic")]
-        public String Nic { get; set; } = String.Empty;
+        public String NIC { get; set; } = String.Empty;
 
         [BsonElement("phone")]
         public String Phone { get; set; } = String.Empty;

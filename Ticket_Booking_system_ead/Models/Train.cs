@@ -14,11 +14,9 @@ namespace Ticket_Booking_system_Backend_EAD.Models
         [BsonElement("trainName")] 
         public string TrainName { get; set; } = string.Empty;
 
-        [BsonElement("scheduleDate")] 
-        public string ScheduleDate { get; set; } = string.Empty;
 
-        [BsonElement("scheduleTime")] 
-        public string ScheduleTime { get; set; } = string.Empty;
+        [BsonElement("scheduleDateTime")] 
+        public DateTime ScheduleDateTime { get; set; }
 
         [BsonElement("seatsCount")] 
         public int SeatsCount { get; set; }

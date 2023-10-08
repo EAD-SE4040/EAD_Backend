@@ -38,10 +38,32 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             return Ok(user);
         }
 
+
+        // Custom method to validate UserType
+        private bool IsValidUserType(string userType)
+        {
+            string[] allowedUserTypes = { "user", "traveler", "traveler agent", "backofficer" };
+            return allowedUserTypes.Contains(userType, StringComparer.OrdinalIgnoreCase);
+        }
+
         // POST api/users
         [HttpPost]
         public ActionResult<User> Post([FromBody] User user)
         {
+            var existingUsers = _userServices.GetUsers();
+
+            // Check if a user with the same NIC already exists
+            if (existingUsers.Any(existingUser => string.Equals(existingUser.NIC, user.NIC, StringComparison.OrdinalIgnoreCase)))
+            {
+                return BadRequest("A user with the same NIC already exists.");
+            }
+
+            // Validate the UserType
+            if (!IsValidUserType(user.UserType))
+            {
+                return BadRequest("Invalid UserType. Allowed values are: user, traveler, traveler agent, backofficer.");
+            }
+
             _userServices.CreateUser(user);
             return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
         }
