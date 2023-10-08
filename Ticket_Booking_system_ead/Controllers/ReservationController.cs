@@ -98,6 +98,11 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             }
 
             // Check if the user is a Traveler and has 4 or more reservations
+            if (user.UserType.Equals("user", StringComparison.OrdinalIgnoreCase))
+            {
+                return BadRequest("User does not have access.");
+            }
+            // Check if the user is a Traveler and has 4 or more reservations
             if (user.UserType.Equals("Traveler", StringComparison.OrdinalIgnoreCase))
             {
                 var userReservations = _reservationService.GetReservationsByUserID(reservation.UserID);
