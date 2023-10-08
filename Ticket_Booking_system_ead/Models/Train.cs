@@ -7,35 +7,29 @@ namespace Ticket_Booking_system_Backend_EAD.Models
     {
 
         [BsonId]
+        
         [BsonRepresentation(BsonType.ObjectId)]
-        public String Id { get; set; } = String .Empty;
+        public string Id { get; set; } = string.Empty;
 
-        [BsonElement("trainNname")]
-        public String TrainNname { get; set; } = String.Empty;
+        [BsonElement("trainName")] 
+        public string TrainName { get; set; } = string.Empty;
 
-        [BsonElement("schedule")]
-        public String Schedule { get; set; } = String.Empty;
+        [BsonElement("scheduleDate")] 
+        public string ScheduleDate { get; set; } = string.Empty;
+
+        [BsonElement("scheduleTime")] 
+        public string ScheduleTime { get; set; } = string.Empty;
+
+        [BsonElement("seatsCount")] 
+        public int SeatsCount { get; set; }
 
         [BsonElement("from")]
-        public String From { get; set; } = String.Empty;
+        public string From { get; set; } = string.Empty;
 
         [BsonElement("to")]
-        public String To { get; set; } = String.Empty;
+        public string To { get; set; } = string.Empty;
 
-        //[BsonElement("seats_count")]
-        //public int seats_count { get; set; } 
 
-        //[BsonElement("to_destination")]
-        //public String to_destination { get; set; } = String.Empty;
-
-        //[BsonElement("from_destination")]
-        //public String from_destination { get; set; } = String.Empty;
-
-        //[BsonElement("date")]
-        //public DateOnly date { get; set; } 
-
-        //[BsonElement("time ")]
-        //public TimeOnly time { get; set; } 
 
 
 
