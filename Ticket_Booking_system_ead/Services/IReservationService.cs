@@ -12,5 +12,9 @@ namespace Ticket_Booking_system_Backend_EAD.Services
         void UpdateReservation(String id, Reservation reservation);
 
         void DeleteReservation(String id);
+
+        List<Reservation> GetReservationsByTrainID(String id);
+
+        List<Reservation> GetReservationsByUserID(String id);
     }
 }

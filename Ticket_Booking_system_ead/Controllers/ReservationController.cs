@@ -9,10 +9,14 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
     public class ReservationController: Controller
     {
         private readonly IReservationService _reservationService;
+        private readonly ItrainServices _trainServices;
+        private readonly IUserServices _userServices;
 
-        public ReservationController(IReservationService reservationService)
+        public ReservationController(IReservationService reservationService, ItrainServices trainServices, IUserServices userServices)
         {
             _reservationService = reservationService;
+            _trainServices = trainServices;
+            _userServices = userServices;
         }
 
         // GET: api/reservations
@@ -37,10 +41,71 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             return Ok(reservation);
         }
 
+        // GET api/reservations/5
+        [HttpGet("/bookings/train/{id}")]
+        public ActionResult<Reservation> GetByTrainID(string id)
+        {
+            var reservation = _reservationService.GetReservationsByTrainID(id);
+
+            if (reservation == null)
+            {
+                return NotFound($"Reservation with TrainId = {id} not found");
+            }
+
+            return Ok(reservation);
+        }
+
+        [HttpGet("/bookings/user/{id}")]
+        public ActionResult<Reservation> GetByUserID(string id)
+        {
+            var reservation = _reservationService.GetReservationsByUserID(id);
+
+            if (reservation == null)
+            {
+                return NotFound($"Reservation with UserId = {id} not found");
+            }
+
+            return Ok(reservation);
+        }
+
         // POST api/reservations
         [HttpPost]
         public ActionResult<Reservation> Post([FromBody] Reservation reservation)
         {
+            // Check if the train exists
+            var train = _trainServices.GetTrain(reservation.TrainID);
+            if (train == null)
+            {
+                return NotFound($"Train with ID = {reservation.TrainID} not found");
+            }
+
+            // Check if the user exists
+            var user = _userServices.GetUser(reservation.UserID);
+            if (user == null)
+            {
+                return NotFound($"User with ID = {reservation.UserID} not found");
+            }
+
+            // Calculate the difference between the reservation date and the current date
+            var currentDate = DateTime.UtcNow;
+            var reservationDate = reservation.ReservationDate;
+            var timeUntilReservation = reservationDate - currentDate;
+
+            // Check if the reservation date is within 30 days from the booking date
+            if (timeUntilReservation.TotalDays > 30)
+            {
+                return BadRequest("Reservation date must be within 30 days from the booking date.");
+            }
+
+            // Check if the user is a Traveler and has 4 or more reservations
+            if (user.UserType.Equals("Traveler", StringComparison.OrdinalIgnoreCase))
+            {
+                var userReservations = _reservationService.GetReservationsByUserID(reservation.UserID);
+                if (userReservations.Count >= 4)
+                {
+                    return BadRequest("Traveler cannot have more than 4 reservations.");
+                }
+            }
             _reservationService.CreateReservation(reservation);
             return CreatedAtAction(nameof(Get), new { id = reservation.Id }, reservation);
         }
@@ -54,6 +119,17 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             if (existingReservation == null)
             {
                 return NotFound($"Reservation with ID = {id} not found");
+            }
+
+            // Calculate the difference between the current date and the reservation date
+            var currentDate = DateTime.UtcNow;
+            var reservationDate = existingReservation.ReservationDate; // Assuming ReservationDate is of type DateTime
+            var timeUntilReservation = reservationDate - currentDate;
+
+            // Check if the reservation can be updated (at least 5 days before)
+            if (timeUntilReservation.TotalDays <= 5)
+            {
+                return BadRequest("Reservation can only be updated at least 5 days before the reservation date.");
             }
 
             _reservationService.UpdateReservation(id, updatedReservation);
@@ -70,6 +146,17 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             if (reservation == null)
             {
                 return NotFound($"Reservation with ID = {id} not found");
+            }
+
+            // Calculate the difference between the current date and the reservation date
+            var currentDate = DateTime.UtcNow;
+            var reservationDate = reservation.ReservationDate; // Assuming ReservationDate is of type DateTime
+            var timeUntilReservation = reservationDate - currentDate;
+
+            // Check if the reservation can be updated (at least 5 days before)
+            if (timeUntilReservation.TotalDays <= 5)
+            {
+                return BadRequest("Reservation can only be updated at least 5 days before the reservation date.");
             }
 
             _reservationService.DeleteReservation(id);
