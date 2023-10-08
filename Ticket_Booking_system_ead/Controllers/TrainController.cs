@@ -11,10 +11,12 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
     public class TrainController : ControllerBase
     {
         private readonly ItrainServices _trainServices;
+        private readonly IReservationService _reservationService;
 
-        public TrainController(ItrainServices trainServices)
+        public TrainController(ItrainServices trainServices, IReservationService reservationService)
         {
             _trainServices = trainServices;
+            _reservationService = reservationService;
         }
 
         // GET: api/trains
@@ -72,6 +74,13 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             if (train == null)
             {
                 return NotFound($"Train with ID = {id} not found");
+            }
+
+            // Check if there are any existing reservations for the train
+            var existingReservations = _reservationService.GetReservationsByTrainID(id);
+            if (existingReservations.Count > 0)
+            {
+                return BadRequest("Cannot cancel a train with existing reservations.");
             }
 
             _trainServices.DeleteTrain(id);

@@ -39,5 +39,15 @@ namespace Ticket_Booking_system_Backend_EAD.Services
         {
             _reservation.ReplaceOne(reservation => reservation.Id == id, reservation1);
         }
+
+        public List<Reservation> GetReservationsByTrainID(string id)
+        {
+            return _reservation.Find(reservation => reservation.TrainID == id && reservation.Status).ToList();
+        }
+
+        public List<Reservation> GetReservationsByUserID(string id)
+        {
+            return _reservation.Find(reservation => reservation.UserID == id).ToList();
+        }
     }
 }

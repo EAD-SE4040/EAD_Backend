@@ -16,9 +16,12 @@ namespace Ticket_Booking_system_Backend_EAD.Models
         public String TrainID { get; set; } = String.Empty;
 
         [BsonElement("reservationDate")]
-        public String ReservationDate { get; set; } = String.Empty;
+        public DateTime ReservationDate { get; set; }
+
+        [BsonElement("noOfSeates")]
+        public int NoOfSeates { get; set; }
 
         [BsonElement("status")]
-        public String Status { get; set; } = String.Empty;
+        public bool Status { get; set; }
     }
 }
