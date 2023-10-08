@@ -1,6 +1,7 @@
 ﻿using Ticket_Booking_system_Backend_EAD.Models;
 
 using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace Ticket_Booking_system_Backend_EAD.Services
 {
@@ -40,5 +41,9 @@ namespace Ticket_Booking_system_Backend_EAD.Services
         {
             _train.ReplaceOne(train => train.Id == id,train1);
         }
+
+
+ 
+
     }
 }

@@ -92,19 +92,8 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             }
            
 
-            var response = new
-            {
-                User = new
-                {
-                    authenticatedUser.Id,
-                    authenticatedUser.Email,
-                    authenticatedUser.UserType,
-                    authenticatedUser.IsActive
-                },
-                Message = "Login successful" // Include a success message
-            };
-
-            return Ok(response);
+         
+            return Ok(authenticatedUser);
         }
     }
 }

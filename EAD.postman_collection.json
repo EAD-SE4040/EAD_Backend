@@ -16,7 +16,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"trainNname\": \"Express\",\r\n        \"schedule\": \"10.pm\",\r\n        \"from\": \"colombo\",\r\n        \"to\":\"jaffna\"\r\n    }",
+					"raw": "    {\r\n        \"trainName\": \"jal express\",\r\n        \"scheduleDate\": \"10/08/2023\",\r\n        \"scheduleTime\": \"1.30pm\",\r\n        \"seatsCount\": 20,\r\n        \"from\": \"Jaffna\",\r\n        \"to\": \"colombo\"\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -48,8 +48,66 @@
 		{
 			"name": "reservation GET/POST",
 			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n  {\r\n  \"UserID\": \"652192d9cb3220501f934583\",\r\n  \"TrainID\": \"6521fe84c856da3d864371bb\",\r\n  \"ReservationDate\": \"2023-10-15T12:00:00\",\r\n  \"NoOfSeates\": 3,\r\n  \"Status\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7064/api/reservation"
+			},
+			"response": []
+		},
+		{
+			"name": "reservation PUT/DELETE",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"id\": \"652247a3963a1648bdab436f\",\r\n        \"userID\": \"647326482782\",\r\n        \"trainID\": \"3264623827682\",\r\n        \"reservationDate\": \"45/45/4555\",\r\n        \"noOfSeates\": 10,\r\n        \"status\": true\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7064/api/reservation/65218bc0ce187f8369ce9c49"
+			},
+			"response": []
+		},
+		{
+			"name": "SpecificUserBooking",
+			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": "https://localhost:7064/bookings/user/652192d9cb3220501f934583"
+			},
+			"response": []
+		},
+		{
+			"name": "SpecificTrainBookings",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7064/bookings/train/3264623827682"
 			},
 			"response": []
 		},
@@ -81,7 +139,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"id\": \"652192d9cb3220501f934583\",\r\n        \"password\": \"check\",\r\n        \"email\": \"an@gmail.com\",\r\n        \"nic\": \"886757565566v\",\r\n        \"phone\": \"07856565655\",\r\n        \"userType\": \"Admin\"\r\n    }",
+					"raw": "    {\r\n        \"id\": \"652192d9cb3220501f934583\",\r\n        \"password\": \"check\",\r\n        \"email\": \"an@gmail.com\",\r\n        \"nic\": \"886757565566v\",\r\n        \"phone\": \"07856565655\",\r\n        \"userType\": \"User\"\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -89,24 +147,6 @@
 					}
 				},
 				"url": "https://localhost:7064/api/user/652192d9cb3220501f934583"
-			},
-			"response": []
-		},
-		{
-			"name": "reservation PUT/DELETE",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\r\n        \"id\": \"65218bc0ce187f8369ce9c49\",\r\n        \"userID\": \"657483535837567474\",\r\n        \"trainID\": \"93658475937545698464\",\r\n        \"reservationDate\": \"23/11/2023\",\r\n        \"status\": \"Active\"\r\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "https://localhost:7064/api/reservation/65218bc0ce187f8369ce9c49"
 			},
 			"response": []
 		}
