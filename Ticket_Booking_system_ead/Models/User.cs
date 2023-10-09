@@ -9,6 +9,9 @@ namespace Ticket_Booking_system_Backend_EAD.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public String Id { get; set; } = String.Empty;
 
+        [BsonElement("name")]
+        public String Name { get; set; } = String.Empty;
+
         [BsonElement("password")]
         public String Password { get; set; } = String.Empty;
 
