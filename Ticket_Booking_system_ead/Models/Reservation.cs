@@ -15,6 +15,9 @@ namespace Ticket_Booking_system_Backend_EAD.Models
         [BsonElement("trainID")]
         public String TrainID { get; set; } = String.Empty;
 
+        [BsonElement("nic")]
+        public String NIC { get; set; } = String.Empty;
+
         [BsonElement("reservationDate")]
         public DateTime ReservationDate { get; set; }
 

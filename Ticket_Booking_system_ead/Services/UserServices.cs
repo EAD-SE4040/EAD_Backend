@@ -33,6 +33,11 @@ namespace Ticket_Booking_system_Backend_EAD.Services
             return _user.Find(user => user.Id == id).FirstOrDefault();
         }
 
+        public User GetUserByNIC(string id)
+        {
+            return _user.Find(user => user.NIC == id).FirstOrDefault();
+        }
+
         public List<User> GetUsers()
         {
             return _user.Find(user => true).ToList();
