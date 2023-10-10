@@ -1,5 +1,14 @@
-﻿using MongoDB.Bson;
+﻿/*
+* File: Reservation.cs
+* Author: Gawsan. R it20051402, Ananthan. Y it20249816, Yathurshan.P it20246532, Sayanthan.K it20118822
+* Date: October 10, 2023
+* Description: This file defines the Reservation model for the Ticket Booking System backend.
+*/
+
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
+
 namespace Ticket_Booking_system_Backend_EAD.Models
 {
     [BsonIgnoreExtraElements]
@@ -7,17 +16,26 @@ namespace Ticket_Booking_system_Backend_EAD.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public String Id { get; set; } = String.Empty;
+        public string Id { get; set; } = string.Empty;
 
         [BsonElement("userID")]
-        public String UserID { get; set; } = String.Empty;
+        public string UserID { get; set; } = string.Empty;
 
         [BsonElement("trainID")]
-        public String TrainID { get; set; } = String.Empty;
+        public string TrainID { get; set; } = string.Empty;
 
         [BsonElement("reservationDate")]
+<<<<<<< Updated upstream
         public String ReservationDate { get; set; } = String.Empty;
+=======
+        public DateTime ReservationDate { get; set; }
 
+        // Number of seats reserved.
+        [BsonElement("noOfSeats")]
+        public int NoOfSeats { get; set; }
+>>>>>>> Stashed changes
+
+        // Reservation status (e.g., confirmed or not).
         [BsonElement("status")]
         public String Status { get; set; } = String.Empty;
     }

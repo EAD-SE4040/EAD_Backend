@@ -1,8 +1,15 @@
-﻿
+﻿/*
+* File: TrainController.cs
+* Author: Gawsan. R it20051402, Ananthan. Y it20249816, Yathurshan.P it20246532, Sayanthan.K it20118822
+* Date: October 10, 2023
+* Description: This file defines the Train Controller for handling train-related actions in the Ticket Booking System backend.
+*/
+
 using Microsoft.AspNetCore.Mvc;
 using Ticket_Booking_system_Backend_EAD.Services;
 using Ticket_Booking_system_Backend_EAD.Models;
 using System;
+using System.Collections.Generic;
 
 namespace Ticket_Booking_system_Backend_EAD.Controllers
 {

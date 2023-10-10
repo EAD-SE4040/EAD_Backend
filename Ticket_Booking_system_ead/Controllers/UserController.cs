@@ -1,7 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*
+* File: UserController.cs
+* Author: Gawsan. R it20051402, Ananthan. Y it20249816, Yathurshan.P it20246532, Sayanthan.K it20118822
+* Date: October 10, 2023
+* Description: This file defines the User Controller for handling user-related actions in the Ticket Booking System backend.
+*/
+
+using Microsoft.AspNetCore.Mvc;
 using Ticket_Booking_system_Backend_EAD.Models;
 using Ticket_Booking_system_Backend_EAD.Services;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Ticket_Booking_system_Backend_EAD.Controllers
 {
@@ -38,6 +47,16 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             return Ok(user);
         }
 
+<<<<<<< Updated upstream
+=======
+        // Custom method to validate UserType
+        private bool IsValidUserType(string userType)
+        {
+            string[] allowedUserTypes = { "user", "traveler", "traveler agent", "backofficer" };
+            return allowedUserTypes.Contains(userType, StringComparer.OrdinalIgnoreCase);
+        }
+
+>>>>>>> Stashed changes
         // POST api/users
         [HttpPost]
         public ActionResult<User> Post([FromBody] User user)
@@ -90,8 +109,8 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
                 // Return a 401 Unauthorized if authentication fails.
                 return Unauthorized("Invalid email or password.");
             }
-           
 
+<<<<<<< Updated upstream
             var response = new
             {
                 User = new
@@ -105,6 +124,9 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             };
 
             return Ok(response);
+=======
+            return Ok(authenticatedUser);
+>>>>>>> Stashed changes
         }
     }
 }
