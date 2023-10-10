@@ -22,17 +22,9 @@ namespace Ticket_Booking_system_Backend_EAD.Models
         [BsonElement("trainName")]
         public string TrainName { get; set; } = string.Empty;
 
-<<<<<<< Updated upstream
-        [BsonElement("scheduleDate")] 
-        public string ScheduleDate { get; set; } = string.Empty;
-
-        [BsonElement("scheduleTime")] 
-        public string ScheduleTime { get; set; } = string.Empty;
-=======
         // Scheduled departure date and time.
         [BsonElement("scheduleDateTime")]
         public DateTime ScheduleDateTime { get; set; }
->>>>>>> Stashed changes
 
         // Total number of seats available on the train.
         [BsonElement("seatsCount")]

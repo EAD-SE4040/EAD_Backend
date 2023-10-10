@@ -25,14 +25,11 @@ namespace Ticket_Booking_system_Backend_EAD.Services
 
         // Deletes a reservation by its ID.
         void DeleteReservation(String id);
-<<<<<<< Updated upstream
-=======
 
         // Retrieves a list of reservations for a specific train by its ID.
         List<Reservation> GetReservationsByTrainID(String id);
 
         // Retrieves a list of reservations for a specific user by their ID.
         List<Reservation> GetReservationsByUserID(String id);
->>>>>>> Stashed changes
     }
 }

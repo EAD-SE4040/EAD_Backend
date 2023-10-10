@@ -49,50 +49,6 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
         [HttpPost]
         public ActionResult<Reservation> Post([FromBody] Reservation reservation)
         {
-<<<<<<< Updated upstream
-=======
-            // Check if the train exists
-            var train = _trainServices.GetTrain(reservation.TrainID);
-            if (train == null)
-            {
-                return NotFound($"Train with ID = {reservation.TrainID} not found");
-            }
-
-            // Check if the user exists
-            var user = _userServices.GetUser(reservation.UserID);
-            if (user == null)
-            {
-                return NotFound($"User with ID = {reservation.UserID} not found");
-            }
-
-            // Calculate the difference between the reservation date and the current date
-            var currentDate = DateTime.UtcNow;
-            var reservationDate = reservation.ReservationDate;
-            var timeUntilReservation = reservationDate - currentDate;
-
-            // Check if the reservation date is within 30 days from the booking date
-            if (timeUntilReservation.TotalDays > 30)
-            {
-                return BadRequest("Reservation date must be within 30 days from the booking date.");
-            }
-
-            // Check if the user is a Traveler and has 4 or more reservations
-            if (user.UserType.Equals("user", StringComparison.OrdinalIgnoreCase))
-            {
-                return BadRequest("User does not have access.");
-            }
-
-            // Check if the user is a Traveler and has 4 or more reservations
-            if (user.UserType.Equals("Traveler", StringComparison.OrdinalIgnoreCase))
-            {
-                var userReservations = _reservationService.GetReservationsByUserID(reservation.UserID);
-                if (userReservations.Count >= 4)
-                {
-                    return BadRequest("Traveler cannot have more than 4 reservations.");
-                }
-            }
-
->>>>>>> Stashed changes
             _reservationService.CreateReservation(reservation);
             return CreatedAtAction(nameof(Get), new { id = reservation.Id }, reservation);
         }

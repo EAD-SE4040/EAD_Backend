@@ -17,14 +17,6 @@ namespace Ticket_Booking_system_Backend_EAD.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = string.Empty;
 
-<<<<<<< Updated upstream
-=======
-        // User's name.
-        [BsonElement("name")]
-        public string Name { get; set; } = string.Empty;
-
-        // User's password.
->>>>>>> Stashed changes
         [BsonElement("password")]
         public string Password { get; set; } = string.Empty;
 
@@ -34,11 +26,7 @@ namespace Ticket_Booking_system_Backend_EAD.Models
 
         // User's NIC (National Identification Card) number.
         [BsonElement("nic")]
-<<<<<<< Updated upstream
         public String Nic { get; set; } = String.Empty;
-=======
-        public string NIC { get; set; } = string.Empty;
->>>>>>> Stashed changes
 
         // User's phone number.
         [BsonElement("phone")]

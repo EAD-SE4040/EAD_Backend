@@ -50,8 +50,6 @@ namespace Ticket_Booking_system_Backend_EAD.Services
         {
             _reservation.ReplaceOne(reservation => reservation.Id == id, reservation1);
         }
-<<<<<<< Updated upstream
-=======
 
         // Retrieves a list of reservations for a specific train by its ID.
         public List<Reservation> GetReservationsByTrainID(string id)
@@ -64,6 +62,5 @@ namespace Ticket_Booking_system_Backend_EAD.Services
         {
             return _reservation.Find(reservation => reservation.UserID == id).ToList();
         }
->>>>>>> Stashed changes
     }
 }

@@ -25,15 +25,11 @@ namespace Ticket_Booking_system_Backend_EAD.Models
         public string TrainID { get; set; } = string.Empty;
 
         [BsonElement("reservationDate")]
-<<<<<<< Updated upstream
         public String ReservationDate { get; set; } = String.Empty;
-=======
-        public DateTime ReservationDate { get; set; }
 
         // Number of seats reserved.
         [BsonElement("noOfSeats")]
         public int NoOfSeats { get; set; }
->>>>>>> Stashed changes
 
         // Reservation status (e.g., confirmed or not).
         [BsonElement("status")]

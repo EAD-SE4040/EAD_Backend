@@ -47,8 +47,6 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             return Ok(user);
         }
 
-<<<<<<< Updated upstream
-=======
         // Custom method to validate UserType
         private bool IsValidUserType(string userType)
         {
@@ -56,7 +54,6 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             return allowedUserTypes.Contains(userType, StringComparer.OrdinalIgnoreCase);
         }
 
->>>>>>> Stashed changes
         // POST api/users
         [HttpPost]
         public ActionResult<User> Post([FromBody] User user)
@@ -110,7 +107,6 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
                 return Unauthorized("Invalid email or password.");
             }
 
-<<<<<<< Updated upstream
             var response = new
             {
                 User = new
@@ -124,9 +120,7 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             };
 
             return Ok(response);
-=======
             return Ok(authenticatedUser);
->>>>>>> Stashed changes
         }
     }
 }
