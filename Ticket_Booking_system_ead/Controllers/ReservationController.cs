@@ -81,9 +81,15 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
 
             // Check if the user exists
             var user = _userServices.GetUser(reservation.UserID);
+            var userNic = _userServices.GetUserByNIC(reservation.NIC);
             if (user == null)
             {
                 return NotFound($"User with ID = {reservation.UserID} not found");
+            }
+
+            if (userNic == null)
+            {
+                return NotFound($"User with NIC = {reservation.NIC} not found");
             }
 
             // Calculate the difference between the reservation date and the current date

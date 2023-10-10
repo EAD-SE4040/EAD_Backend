@@ -8,6 +8,8 @@ namespace Ticket_Booking_system_Backend_EAD.Services
 
         User GetUser(String id);
 
+        User GetUserByNIC(String id);
+
         User CreateUser(User user);
 
         void UpdateUser(String id, User user);
