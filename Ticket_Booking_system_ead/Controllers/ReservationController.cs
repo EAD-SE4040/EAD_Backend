@@ -81,12 +81,12 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
 
             // Check if the user exists
             var user = _userServices.GetUser(reservation.UserID);
-            var userNic = _userServices.GetUserByNIC(reservation.NIC);
             if (user == null)
             {
                 return NotFound($"User with ID = {reservation.UserID} not found");
             }
 
+            var userNic = _userServices.GetUserByNIC(reservation.NIC);
             if (userNic == null)
             {
                 return NotFound($"User with NIC = {reservation.NIC} not found");
@@ -112,10 +112,16 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             if (user.UserType.Equals("Traveler", StringComparison.OrdinalIgnoreCase))
             {
                 var userReservations = _reservationService.GetReservationsByUserID(reservation.UserID);
-                if (userReservations.Count >= 4)
+                if (userReservations.Count > 4)
                 {
-                    return BadRequest("Traveler cannot have more than 4 reservations.");
+                    return BadRequest("Sorry, travelers cannot have more than 4 reservations.");
                 }
+            }
+
+            var ReservationsByNIC = _reservationService.GetReservationsByNIC(reservation.NIC);
+            if (ReservationsByNIC.Count > 4)
+            {
+                return BadRequest($"Sorry, but the NIC number associated with this reservation ({reservation.NIC}) has already reached the maximum of 4 reservations.");
             }
             _reservationService.CreateReservation(reservation);
             return CreatedAtAction(nameof(Get), new { id = reservation.Id }, reservation);
@@ -130,6 +136,18 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             if (existingReservation == null)
             {
                 return NotFound($"Reservation with ID = {id} not found");
+            }
+
+            var userNic = _userServices.GetUserByNIC(updatedReservation.NIC);
+            if (userNic == null)
+            {
+                return NotFound($"User with NIC = {updatedReservation.NIC} not found");
+            }
+
+            var ReservationsByNIC = _reservationService.GetReservationsByNIC(updatedReservation.NIC);
+            if (ReservationsByNIC.Count > 4)
+            {
+                return BadRequest($"Sorry, but the NIC number associated with this reservation ({updatedReservation.NIC}) has already reached the maximum of 4 reservations.");
             }
 
             // Calculate the difference between the current date and the reservation date
@@ -159,6 +177,7 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
                 return NotFound($"Reservation with ID = {id} not found");
             }
 
+
             // Calculate the difference between the current date and the reservation date
             var currentDate = DateTime.UtcNow;
             var reservationDate = reservation.ReservationDate; // Assuming ReservationDate is of type DateTime
@@ -167,8 +186,9 @@ namespace Ticket_Booking_system_Backend_EAD.Controllers
             // Check if the reservation can be updated (at least 5 days before)
             if (timeUntilReservation.TotalDays <= 5)
             {
-                return BadRequest("Reservation can only be updated at least 5 days before the reservation date.");
+                return BadRequest("Reservation can only be deleted at least 5 days before the reservation date.");
             }
+
 
             _reservationService.DeleteReservation(id);
 
