@@ -16,5 +16,7 @@ namespace Ticket_Booking_system_Backend_EAD.Services
         List<Reservation> GetReservationsByTrainID(String id);
 
         List<Reservation> GetReservationsByUserID(String id);
+
+        List<Reservation> GetReservationsByNIC(String id);
     }
 }

@@ -49,5 +49,10 @@ namespace Ticket_Booking_system_Backend_EAD.Services
         {
             return _reservation.Find(reservation => reservation.UserID == id).ToList();
         }
+
+        public List<Reservation> GetReservationsByNIC(string id)
+        {
+            return _reservation.Find(reservation => reservation.NIC == id).ToList();
+        }
     }
 }
